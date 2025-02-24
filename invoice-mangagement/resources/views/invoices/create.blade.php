@@ -14,7 +14,9 @@
     <!-- Bảng sản phẩm -->
     <div class="product-list">
         <h2>Danh sách sản phẩm</h2>
+        @if(auth()->check() && auth()->user()->id === 4)
         <a href="{{ route('products.create') }}" class="button">+ Thêm sản phẩm</a>
+        @endif
         <div class="search-box">
             <form action="{{ route('invoices.create') }}" method="GET">
                 <input type="text" name="search" placeholder="Tìm kiếm sản phẩm..." value="{{ request('search') }}">
