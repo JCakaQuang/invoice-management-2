@@ -46,3 +46,8 @@ use App\Http\Controllers\ProductController;
 
 Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
 Route::post('/products/store', [ProductController::class, 'store'])->name('products.store');
+
+Route::post('/invoices/remove-from-cart', [InvoiceController::class, 'removeFromCart'])->name('invoices.removeFromCart');
+
+// Route để xóa tất cả sản phẩm khỏi giỏ hàng
+Route::post('/invoices/clear-cart', [InvoiceController::class, 'clearCart'])->name('invoices.clearCart');

@@ -50,39 +50,53 @@
     </div>
 
     <!-- Hóa đơn tạm -->
-    <div class="invoice-box">
-        <h2>Hóa đơn tạm</h2>
-        @if (!empty($cart))
-        <table>
-            <tr>
-                <th>Sản phẩm</th>
-                <th>SL</th>
-                <th>Giá</th>
-                <th>Tổng</th>
-            </tr>
-            @php $total = 0; @endphp
-            @foreach ($cart as $item)
-            <tr>
-                <td>{{ $item['name'] }}</td>
-                <td>{{ $item['quantity'] }}</td>
-                <td>{{ number_format($item['price'], 2) }} VND</td>
-                <td>{{ number_format($item['quantity'] * $item['price'], 2) }} VND</td>
-            </tr>
-            @php $total += $item['quantity'] * $item['price']; @endphp
-            @endforeach
-            <tr class="total-row">
-                <td colspan="3"><strong>Tổng cộng:</strong></td>
-                <td><strong>{{ number_format($total, 2) }} VND</strong></td>
-            </tr>
-        </table>
-        <form action="{{ route('invoices.store') }}" method="POST">
-            @csrf
-            <button type="submit" class="save-button">Lưu hóa đơn</button>
-        </form>
-        @else
-        <p>Chưa có sản phẩm nào trong hóa đơn.</p>
-        @endif
-    </div>
+<div class="invoice-box">
+    <h2>Hóa đơn tạm</h2>
+    @if (!empty($cart))
+    <table>
+        <tr>
+            <th>Sản phẩm</th>
+            <th>SL</th>
+            <th>Giá</th>
+            <th>Tổng</th>
+            <th>Hành động</th>
+        </tr>
+        @php $total = 0; @endphp
+        @foreach ($cart as $index => $item)
+        <tr>
+            <td>{{ $item['name'] }}</td>
+            <td>{{ $item['quantity'] }}</td>
+            <td>{{ number_format($item['price'], 2) }} VND</td>
+            <td>{{ number_format($item['quantity'] * $item['price'], 2) }} VND</td>
+            <td>
+                <form action="{{ route('invoices.removeFromCart') }}" method="POST" class="remove-form">
+                    @csrf
+                    <input type="hidden" name="index" value="{{ $index }}">
+                    <button type="submit" class="remove-button">Xóa</button>
+                </form>
+            </td>
+        </tr>
+        @php $total += $item['quantity'] * $item['price']; @endphp
+        @endforeach
+        <tr class="total-row">
+            <td colspan="3"><strong>Tổng cộng:</strong></td>
+            <td><strong>{{ number_format($total, 2) }} VND</strong></td>
+            <td></td>
+        </tr>
+    </table>
+    <form action="{{ route('invoices.store') }}" method="POST">
+        @csrf
+        <button type="submit" class="save-button">Lưu hóa đơn</button>
+    </form>
+    <form action="{{ route('invoices.clearCart') }}" method="POST" class="clear-form">
+        @csrf
+        <button type="submit" class="clear-button">Xóa tất cả</button>
+    </form>
+    @else
+    <p>Chưa có sản phẩm nào trong hóa đơn.</p>
+    @endif
+</div>
+
 </div>
 
 <style>
@@ -190,8 +204,42 @@
         transform: translateY(-1px);
     }
 
+    .clear-button {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: #6b7280;
+        color: white;
+        border: none;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        margin-top: 0.5rem;
+    }
+
+    .clear-button:hover {
+        background-color: #4b5563;
+        transform: translateY(-1px);
+    }
+
+    .remove-button {
+        padding: 0.5rem 0.75rem;
+        background-color: #ef4444;
+        color: white;
+        border: none;
+        border-radius: 0.375rem;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        font-size: 0.875rem;
+    }
+
+    .remove-button:hover {
+        background-color: #dc2626;
+    }
+
     /* Form Elements */
-    .add-form {
+    .add-form, .remove-form {
         display: flex;
         gap: 0.5rem;
         align-items: center;
