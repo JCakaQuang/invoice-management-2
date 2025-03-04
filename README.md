@@ -18,7 +18,7 @@ Users can register an account, create a personal profile, and track their genera
 
 <h2>Use Case</h2>
 <div align='center'>
-    <img src='https://raw.githubusercontent.com/JCakaQuang/invoice-management/main/images/use%20case.JPG' alt='Use Case' width='600'>
+    <img src='[https://raw.githubusercontent.com/JCakaQuang/invoice-management/main/images/use%20case.JPG](https://github.com/JCakaQuang/invoice-management/blob/main/images/use%20case%20(2).png)' alt='Use Case' width='600'>
 </div>
 
 
