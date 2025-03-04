@@ -1,8 +1,7 @@
-# YourMUSIC
-<img src="https://github.com/miin000/YourMUSIC/blob/main/images/intro.png">
+# Invoice manager
 <h1>About me</h1>
 <ul>
-    <a href = 'https://github.com/miin000' ><li>Nguyễn Văn Quang - 23011955</li></a>
+    <li>Nguyễn Văn Quang - 23011955</li></a>
 </ul>
 <h1>About my project</h1>
 <p>This is an invoice management web application that provides users with a flexible and convenient platform to create, store, and manage invoices efficiently.
